@@ -166,7 +166,7 @@ export const renewAdminToken = async (refreshToken) => {
 
     const admin = {
       username: adminData.username,
-      password : adminData.password
+      password: adminData.password
     }
 
     const newAccessToken = JWT.sign(
