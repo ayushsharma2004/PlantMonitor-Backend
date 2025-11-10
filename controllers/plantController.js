@@ -1,5 +1,4 @@
 import { db, admin } from "../DB/firestore.js";
-
 // ========== 1️⃣ Update or Add Plant Data ==========
 export const updatePlantData = async (req, res) => {
   try {
@@ -10,6 +9,9 @@ export const updatePlantData = async (req, res) => {
       moisture,
       temperature,
       humidity,
+      soil_temperature, // 🌱 New optional field
+      evaporative_demand, // 💧 New optional field
+      watering_recommendation, // 🌿 New optional field
     } = req.body;
 
     // ✅ Validation for required fields
@@ -35,6 +37,12 @@ export const updatePlantData = async (req, res) => {
     if (moisture !== undefined) updateData.moisture = moisture;
     if (temperature !== undefined) updateData.temperature = temperature;
     if (humidity !== undefined) updateData.humidity = humidity;
+    if (soil_temperature !== undefined)
+      updateData.soil_temperature = soil_temperature;
+    if (evaporative_demand !== undefined)
+      updateData.evaporative_demand = evaporative_demand;
+    if (watering_recommendation !== undefined)
+      updateData.watering_recommendation = watering_recommendation;
 
     // ✅ Update or create document (merge keeps existing data)
     await plantRef.set(updateData, { merge: true });
