@@ -36,7 +36,7 @@ app.use(
       }
     },
     credentials: true,
-  })
+  }),
 );
 
 app.use((req, res, next) => {
@@ -45,11 +45,11 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", true);
   res.header(
     "Access-Control-Allow-Methods",
-    "GET,PUT,POST,DELETE,UPDATE,OPTIONS"
+    "GET,PUT,POST,DELETE,UPDATE,OPTIONS",
   );
   res.header(
     "Access-Control-Allow-Headers",
-    "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept"
+    "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept",
   );
   next();
 });
@@ -64,7 +64,7 @@ app.use((req, res, next) => {
   res.on("finish", () => {
     const duration = Date.now() - start;
     console.log(
-      `${req.method} ${req.originalUrl} ${res.statusCode} - ${duration}ms`
+      `${req.method} ${req.originalUrl} ${res.statusCode} - ${duration}ms`,
     );
   });
   next();
@@ -72,6 +72,8 @@ app.use((req, res, next) => {
 
 //routes
 app.use("/api/v1/plants", plantRoutes);
+// Mount the route
+app.use("/api/antenna", antennaRoutes);
 
 //rest api
 app.get("/", (req, res) => {
