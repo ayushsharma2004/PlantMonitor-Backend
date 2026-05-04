@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 
 import plantRoutes from "./routes/plantsRoute.js";
+import antennaRoutes from "./routes/antennaRoute.js";
 import cookieParser from "cookie-parser";
 
 import cors from "cors";
