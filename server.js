@@ -3,10 +3,12 @@ import colors from "colors";
 import dotenv from "dotenv";
 import morgan from "morgan";
 
+// --- Route Imports ---
 import plantRoutes from "./routes/plantsRoute.js";
 import antennaRoutes from "./routes/antennaRoute.js";
-import cookieParser from "cookie-parser";
+import biometricRoutes from "./routes/antennaRoute.js"; // ✅ NEW: Biometric Routes Imported
 
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import bodyParser from "body-parser";
 import multer from "multer";
@@ -23,7 +25,7 @@ const allowedOrigins = [
   "http://localhost:5174",
   "https://sn-music-student-frontend.vercel.app",
   "https://plant-monitor-frontend-livid.vercel.app",
-  "https://sn-music-student-frontend-git-e441d8-ayushsharma2004s-projects.vercel.app", // removed trailing slash
+  "https://sn-music-student-frontend-git-e441d8-ayushsharma2004s-projects.vercel.app",
   "https://sn-music-admin-frontend.vercel.app",
 ];
 
@@ -59,6 +61,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 // app.use(morgan('combined'));
 app.use(cookieParser());
+
 // Custom middleware to log request duration
 app.use((req, res, next) => {
   const start = Date.now();
@@ -71,15 +74,15 @@ app.use((req, res, next) => {
   next();
 });
 
-//routes
+// --- Mount the routes ---
 app.use("/api/v1/plants", plantRoutes);
-// Mount the route
 app.use("/api/antenna", antennaRoutes);
+app.use("/api/v1/biometrics", biometricRoutes); // ✅ NEW: Biometric Routes Mounted
 
 //rest api
 app.get("/", (req, res) => {
   try {
-    res.send("<h1>Welcome to SNMUSIC</h1>");
+    res.send("<h1>Welcome to Career-Pulse / SNMUSIC Backend</h1>");
   } catch (error) {
     console.log(error);
   }
