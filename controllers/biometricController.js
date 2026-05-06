@@ -11,6 +11,8 @@ export const addBiometricReading = async (req, res) => {
       userId, // Optional: To link data to a specific user
     } = req.body;
 
+    var a;
+
     // ✅ Validation for required fields from the ESP32
     if (heartRate === undefined || gsr === undefined) {
       return res.status(400).send({
